@@ -172,7 +172,7 @@ ego <- enrichGO( gene = sig_genes,
 ## writeLines(summary(ego), "enrich_GO_results.txt")
 
 pdf("plots_ego.pdf")
-dotplot(ego, showCategory=30)
+dotplot(ego, showCategory=10)
 dev.off()
 
 pdf("plots_network-ego.pdf")
