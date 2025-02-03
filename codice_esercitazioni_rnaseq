@@ -121,7 +121,10 @@ resdata <- as_tibble(resOrdered)
 resdata$gene <- rownames(resOrdered)
 write_tsv(resdata, "analysis_esercizio_03_results.tsv")
 
-
+significant_genes <- as_tibble(resdata %>%
+                                 filter(padj < 0.05))
+write_tsv(significant_genes, "significant_genes.tsv")
+sig_genes <- resdata$gene[which(resdata$padj < 0.05)]
 
 ############################################
 ## CLUSTERING ##############################
