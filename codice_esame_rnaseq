@@ -1,12 +1,12 @@
 #sul terminale
 pwd
 
-cd datiesame/
+cd /home/gitpod/datiesame/
 
 mkdir -p rawdata
 
 #decomprimere file in gz
-tar -xzvf data_rnaseq.tar.gz -C datiesame/rawdata/
+tar -xzvf data_rnaseq.tar.gz -C /home/gitpod/datiesame/rawdata/
 
 #Verifico che sia supportato salmon con comando 
 salmon
