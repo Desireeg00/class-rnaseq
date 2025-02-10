@@ -123,7 +123,7 @@ names(pvalue_ens_genes)<-sig_genes
 pvalue_entrez_genes <- resdata$padj[which(resdata$padj<0.05)]
 names(pvalue_entrez_genes) <- entrez_genes_sig
 
-ego <- enrichGO( gene = sig_genes,
+ego_BP <- enrichGO( gene = sig_genes,
                  universe = unique(tx2gene$GENEID),
                  OrgDb = org.Hs.eg.db,
                  keyType = 'ENSEMBL',
@@ -131,10 +131,38 @@ ego <- enrichGO( gene = sig_genes,
                  pAdjustMethod = "BH",
                  pvalueCutoff  = 0.05)
 
-dotplot(ego, showCategory=10)
+ego_MF <- enrichGO( gene = sig_genes,
+                 universe = unique(tx2gene$GENEID),
+                 OrgDb = org.Hs.eg.db,
+                 keyType = 'ENSEMBL',
+                 ont = "MF",
+                 pAdjustMethod = "BH",
+                 pvalueCutoff  = 0.05)
+
+ego_CC <- enrichGO( gene = sig_genes,
+                 universe = unique(tx2gene$GENEID),
+                 OrgDb = org.Hs.eg.db,
+                 keyType = 'ENSEMBL',
+                 ont = "CC",
+                 pAdjustMethod = "BH",
+                 pvalueCutoff  = 0.05)
+
+dotplot(ego_BP, showCategory=10)
 dev.off()
 
-cnetplot(ego, foldChange=resdata$log2FoldChange[which(resdata$padj<0.5)])
+cnetplot(ego_BP, foldChange=resdata$log2FoldChange[which(resdata$padj<0.5)])
+dev.off()
+
+dotplot(ego_MF, showCategory=10)
+dev.off()
+
+cnetplot(ego_MF, foldChange=resdata$log2FoldChange[which(resdata$padj<0.5)])
+dev.off()
+
+dotplot(ego_CC, showCategory=10)
+dev.off()
+
+cnetplot(ego_CC, foldChange=resdata$log2FoldChange[which(resdata$padj<0.5)])
 dev.off()
 
 gda <- read_tsv(gzfile("/home/gitpod/datiesame/datasets_reference_only/trascriptome/all_gene_disease_associations.tsv.gz"))
