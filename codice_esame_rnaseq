@@ -1,12 +1,12 @@
 #sul terminale
-ls -l
+pwd
 
 cd datiesame/
 
 mkdir -p rawdata
 
 #decomprimere file in gz
-tar -xzvf data_rnaseq.tar.gz -C rawdata/
+tar -xzvf data_rnaseq.tar.gz -C datiesame/rawdata/
 
 #Verifico che sia supportato salmon con comando 
 salmon
